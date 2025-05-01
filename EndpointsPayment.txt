@@ -1,0 +1,8 @@
+GET /payments: Lấy danh sách thanh toán
+POST /payments: Tạo thanh toán mới
+GET /payments/stats: Lấy thống kê thanh toán
+GET /payments/{id}: Xem chi tiết thanh toán
+PUT /payments/{id}: Cập nhật thanh toán
+PATCH /payments/{id}/complete: Đánh dấu hoàn thành
+PATCH /payments/{id}/fail: Đánh dấu thất bại
+POST /payments/{id}/refund: Xử lý hoàn tiền

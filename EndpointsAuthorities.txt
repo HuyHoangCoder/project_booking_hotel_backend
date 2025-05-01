@@ -1,0 +1,35 @@
+- Lấy danh sách phân quyền
+Method: GET
+URL: /api/authorities
+Query params: username (tùy chọn)
+Response: Danh sách phân quyền với phân trang
+
+- Thêm quyền mới
+Method: POST
+URL: /api/authorities
+Body:
+   {
+       "username": "example_user",
+       "permission": "ROLE_ADMIN",
+       "details": "Full system access"
+   }
+- Xem chi tiết quyền
+Method: GET
+URL: /api/authorities/{id}
+    {
+       "details": "Updated permission details"
+    }
+
+- Cập nhật quyền
+Method: PUT
+URL: /api/authorities/{id}
+Body:
+
+- Xóa quyền
+Method: DELETE
+URL: /api/authorities/{id}
+
+- Xem quyền của người dùng
+Method: GET
+URL: /api/authorities/user/{username}
+Response: Thông tin tài khoản và danh sách quyền

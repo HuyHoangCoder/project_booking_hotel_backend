@@ -1,0 +1,7 @@
+GET /api/invoices/{invoiceId}/details - Danh sách chi tiết
+POST /api/invoices/{invoiceId}/details - Thêm chi tiết mới
+GET /api/invoices/{invoiceId}/details/stats - Thống kê chi tiết
+GET /api/invoices/{invoiceId}/details/{id} - Xem chi tiết cụ thể
+PUT /api/invoices/{invoiceId}/details/{id} - Cập nhật chi tiết
+DELETE /api/invoices/{invoiceId}/details/{id} - Xóa chi tiết
+PATCH /api/invoices/{invoiceId}/details/{id}/toggle-status - Toggle trạng thái

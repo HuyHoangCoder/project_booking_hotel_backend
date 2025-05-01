@@ -1,0 +1,8 @@
+GET /api/bookings: Danh sách đặt phòng
+POST /api/bookings: Tạo đặt phòng mới
+GET /api/bookings/{id}: Chi tiết đặt phòng
+PUT /api/bookings/{id}: Cập nhật đặt phòng
+POST /api/bookings/{id}/confirm: Xác nhận đặt phòng
+POST /api/bookings/{id}/check-in: Check-in
+POST /api/bookings/{id}/check-out: Check-out
+POST /api/bookings/{id}/cancel: Hủy đặt phòng

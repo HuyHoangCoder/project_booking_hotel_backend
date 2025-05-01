@@ -1,0 +1,37 @@
+Giải thích các API endpoints đã tạo:
+
+-Lấy danh sách tài khoản
+Method: GET
+URL: /api/accounts
+Chức năng: Trả về danh sách tài khoản với phân trang (10 tài khoản/trang)
+
+-Tạo tài khoản mới
+Method: POST
+URL: /api/accounts
+Body:
+
+-Xem chi tiết tài khoản
+Method: GET
+URL: /api/accounts/{id}
+Chức năng: Trả về thông tin chi tiết của một tài khoản
+
+-Cập nhật tài khoản
+Method: PUT
+URL: /api/accounts/{id}
+Body:
+
+
+-Xóa tài khoản
+Method: DELETE
+URL: /api/accounts/{id}
+Chức năng: Xóa tài khoản khỏi hệ thống
+
+-Thay đổi trạng thái tài khoản
+Method: PATCH
+URL: /api/accounts/{id}/toggle-status
+Chức năng: Bật/tắt trạng thái hoạt động của tài khoản
+
+
+
+
+

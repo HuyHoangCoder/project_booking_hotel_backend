@@ -1,0 +1,56 @@
+API Endpoints:
+- Lấy danh sách khách hàng
+    Method: GET
+    URL: /api/customers
+    Query params:
+    customer_type: Lọc theo loại khách hàng
+    group_id: Lọc theo nhóm
+    age_from, age_to: Lọc theo độ tuổi
+    search: Tìm kiếm theo tên, email, phone, CMND
+    sort_by, sort_direction: Sắp xếp
+    per_page: Số lượng kết quả mỗi trang
+- Thêm khách hàng mới
+    Method: POST
+    URL: /api/customers
+    Body:
+       {
+            "fullname": "John Doe",
+            "citizen_identity": "123456789",
+            "phone": "0123456789",
+            "email": "john@example.com",
+            "dob": "1990-01-01",
+            "customer_type": 1,
+            "groups": [
+                {
+                    "group_id": 1,
+                    "fullname": "John Doe",
+                    "relationship": "Primary"
+                }
+            ]
+        }
+- Xem chi tiết khách hàng
+    Method: GET
+    URL: /api/customers/{id}
+- Cập nhật thông tin khách hàng
+    Method: PUT
+    URL: /api/customers/{id}
+    Body: Tương tự như thêm mới
+- Xóa khách hàng
+    Method: DELETE
+    URL: /api/customers/{id}
+- Thêm khách hàng vào nhóm
+    Method: POST
+    URL: /api/customers/{id}/groups
+    Body:
+        {
+            "group_id": 1,
+            "fullname": "John Doe",
+            "relationship": "Member"
+        }
+- Xóa khách hàng khỏi nhóm
+    Method: DELETE
+    URL: /api/customers/{id}/groups
+    Body:
+       {
+            "group_id": 1
+        }

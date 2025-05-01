@@ -1,0 +1,10 @@
+GET /service-types: Lấy danh sách loại dịch vụ
+POST /service-types: Tạo loại dịch vụ mới
+GET /service-types/stats: Lấy thống kê
+GET /service-types/{id}: Xem chi tiết loại dịch vụ
+PUT /service-types/{id}: Cập nhật loại dịch vụ
+DELETE /service-types/{id}: Xóa loại dịch vụ
+PATCH /service-types/{id}/toggle-status: Bật/tắt trạng thái
+PATCH /service-types/{id}/display-order: Cập nhật thứ tự hiển thị
+GET /service-types/{id}/services: Lấy danh sách dịch vụ
+GET /service-types/{id}/active-services: Lấy danh sách dịch vụ đang hoạt động

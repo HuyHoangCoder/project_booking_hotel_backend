@@ -1,0 +1,8 @@
+API Endpoints:
+GET /api/customer-types: Danh sách loại khách hàng
+POST /api/customer-types: Tạo loại khách hàng mới
+GET /api/customer-types/{id}: Chi tiết loại khách hàng
+PUT /api/customer-types/{id}: Cập nhật loại khách hàng
+DELETE /api/customer-types/{id}: Xóa loại khách hàng
+PATCH /api/customer-types/{id}/toggle-status: Bật/tắt trạng thái
+GET /api/customer-types/eligible-types: Lấy danh sách loại phù hợp theo điểm

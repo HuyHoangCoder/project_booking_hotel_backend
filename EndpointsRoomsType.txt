@@ -1,0 +1,2 @@
+GET /api/room-types/{id}/stats: Lấy thống kê chi tiết của một loại phòng
+GET /api/room-types/available: Lấy danh sách các loại phòng có sẵn

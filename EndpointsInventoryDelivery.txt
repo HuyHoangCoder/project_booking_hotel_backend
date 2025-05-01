@@ -1,0 +1,8 @@
+GET /inventory-deliveries: Lấy danh sách phiếu xuất kho
+POST /inventory-deliveries: Tạo phiếu xuất kho mới
+GET /inventory-deliveries/stats: Lấy thống kê
+GET /inventory-deliveries/{id}: Xem chi tiết phiếu xuất kho
+PUT /inventory-deliveries/{id}: Cập nhật phiếu xuất kho
+DELETE /inventory-deliveries/{id}: Xóa phiếu xuất kho
+PATCH /inventory-deliveries/{id}/mark-delivered: Đánh dấu đã xuất
+PATCH /inventory-deliveries/{id}/cancel: Hủy phiếu xuất kho

@@ -1,0 +1,8 @@
+GET /lost-items: Liệt kê đồ thất lạc
+POST /lost-items: Tạo mới
+GET /lost-items/stats: Lấy thống kê
+GET /lost-items/{id}: Xem chi tiết
+PUT /lost-items/{id}: Cập nhật
+DELETE /lost-items/{id}: Xóa
+PATCH /lost-items/{id}/mark-claimed: Đánh dấu đã nhận
+PATCH /lost-items/{id}/mark-disposed: Đánh dấu đã xử lý

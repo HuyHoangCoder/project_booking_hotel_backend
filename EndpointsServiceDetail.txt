@@ -1,0 +1,9 @@
+GET /service-details: Lấy danh sách dịch vụ
+POST /service-details: Tạo dịch vụ mới
+GET /service-details/stats: Lấy thống kê
+GET /service-details/{id}: Xem chi tiết dịch vụ
+PUT /service-details/{id}: Cập nhật dịch vụ
+DELETE /service-details/{id}: Xóa dịch vụ
+PATCH /service-details/{id}/toggle-status: Bật/tắt trạng thái
+POST /service-details/{id}/calculate-price: Tính giá
+GET /service-details/{id}/time-slots: Lấy khung giờ

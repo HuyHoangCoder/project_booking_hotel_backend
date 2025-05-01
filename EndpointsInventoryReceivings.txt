@@ -1,0 +1,8 @@
+GET /inventory-receivings: Lấy danh sách phiếu nhập kho
+POST /inventory-receivings: Tạo phiếu nhập kho mới
+GET /inventory-receivings/stats: Lấy thống kê
+GET /inventory-receivings/{id}: Xem chi tiết phiếu nhập kho
+PUT /inventory-receivings/{id}: Cập nhật phiếu nhập kho
+DELETE /inventory-receivings/{id}: Xóa phiếu nhập kho
+PATCH /inventory-receivings/{id}/mark-received: Đánh dấu đã nhận
+PATCH /inventory-receivings/{id}/cancel: Hủy phiếu nhập kho

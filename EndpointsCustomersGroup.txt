@@ -1,0 +1,9 @@
+GET /api/customer-groups: Danh sách nhóm
+POST /api/customer-groups: Tạo nhóm mới
+GET /api/customer-groups/{id}: Chi tiết nhóm
+PUT /api/customer-groups/{id}: Cập nhật nhóm
+DELETE /api/customer-groups/{id}: Xóa nhóm
+PATCH /api/customer-groups/{id}/toggle-status: Bật/tắt trạng thái
+POST /api/customer-groups/{id}/members: Thêm thành viên
+DELETE /api/customer-groups/{id}/members: Xóa thành viên
+PUT /api/customer-groups/{id}/members: Cập nhật thông tin thành viên

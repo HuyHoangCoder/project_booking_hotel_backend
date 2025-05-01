@@ -1,0 +1,8 @@
+GET /api/invoices - List all invoices with filtering and pagination
+POST /api/invoices - Create a new invoice
+GET /api/invoices/stats - Get invoice statistics
+GET /api/invoices/{id} - Get a specific invoice
+PUT /api/invoices/{id} - Update an invoice
+POST /api/invoices/{id}/payments - Add a payment to an invoice
+POST /api/invoices/{id}/cancel - Cancel an invoice
+POST /api/invoices/{id}/refund - Process a refund for an invoice

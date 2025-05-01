@@ -1,0 +1,23 @@
+API Endpoints:
+Phòng:
+    GET /api/rooms: Danh sách phòng
+    POST /api/rooms: Tạo phòng mới
+    GET /api/rooms/{id}: Chi tiết phòng
+    PUT /api/rooms/{id}: Cập nhật phòng
+    DELETE /api/rooms/{id}: Xóa phòng
+    PATCH /api/rooms/{id}/status: Cập nhật trạng thái
+Loại phòng:
+    GET /api/room-types: Danh sách loại phòng
+    POST /api/room-types: Tạo loại phòng mới
+    GET /api/room-types/{id}: Chi tiết loại phòng
+    PUT /api/room-types/{id}: Cập nhật loại phòng
+    DELETE /api/room-types/{id}: Xóa loại phòng
+    PATCH /api/room-types/{id}/toggle-status: Bật/tắt trạng thái
+Tầng:
+    GET /api/floors: Danh sách tầng
+    POST /api/floors: Tạo tầng mới
+    GET /api/floors/{id}: Chi tiết tầng
+    PUT /api/floors/{id}: Cập nhật tầng
+    DELETE /api/floors/{id}: Xóa tầng
+    PATCH /api/floors/{id}/toggle-status: Bật/tắt trạng thái
+    GET /api/floors/{id}/stats: Thống kê phòng theo tầng

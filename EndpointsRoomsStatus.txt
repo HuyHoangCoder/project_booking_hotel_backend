@@ -1,0 +1,7 @@
+GET /api/room-statuses: Danh sách trạng thái
+POST /api/room-statuses: Tạo trạng thái mới
+GET /api/room-statuses/{id}: Chi tiết trạng thái
+PUT /api/room-statuses/{id}: Cập nhật trạng thái
+DELETE /api/room-statuses/{id}: Xóa trạng thái
+PATCH /api/room-statuses/{id}/toggle-status: Bật/tắt trạng thái
+GET /api/room-statuses/stats: Thống kê trạng thái

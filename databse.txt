@@ -1,0 +1,345 @@
+Giải thích cấu trúc bảng accounts:
+Các trường cơ bản:
+    id: Khóa chính, tự động tăng
+    username: Tên đăng nhập, unique để không bị trùng lặp
+    password: Mật khẩu (đã được hash)
+    employee_id: Khóa ngoại liên kết với bảng employees
+    is_active: Trạng thái tài khoản (true/false), mặc định là true
+    created_date: Thời gian tạo tài khoản
+    timestamps: Tự động thêm created_at và updated_at
+
+Các ràng buộc:
+    Username là unique
+    Employee_id là khóa ngoại tới bảng employees
+    Khi xóa employee thì account cũng sẽ bị xóa theo (onDelete('cascade'))
+
+
+-------------------------------------------------------
+
+Giải thích chức năng phân quyền:
+    Cấu trúc bảng Authorities:
+    id: Khóa chính
+    username: Khóa ngoại liên kết với bảng accounts
+    permission: Tên quyền
+    details: Chi tiết về quyền (tùy chọn)
+    Ràng buộc unique cho cặp [username, permission] để tránh trùng lặp
+
+
+--------------------------------------------------------
+
+Cấu trúc bảng Employees:
+id: Khóa chính
+citizen_identity: Số CMND/CCCD (unique)
+fullname: Họ tên nhân viên
+gender: Giới tính (male/female/other)
+dob: Ngày sinh
+email: Email (unique)
+avatar: Ảnh đại diện
+created_date: Ngày tạo
+is_active: Trạng thái làm việc
+role_id: Khóa ngoại liên kết với bảng roles
+
+
+---------------------------------------------------------
+
+Giải thích chức năng quản lý khách hàng:
+Cấu trúc bảng:
+customers: Thông tin khách hàng
+customer_types: Loại khách hàng
+customer_groups: Nhóm khách hàng
+group_members: Bảng trung gian quản lý thành viên nhóm
+
+
+
+---------------------------------------------------------
+
+Bảng customer_types với các trường:
+name: Tên loại khách hàng
+code: Mã loại khách hàng
+description: Mô tả
+discount_percentage: Phần trăm giảm giá
+minimum_points: Điểm tối thiểu để đạt loại
+is_active: Trạng thái hoạt động
+benefits: Danh sách lợi ích (JSON)
+
+
+----------------------------------------------------------
+
+Bảng customer_groups với các trường:
+name: Tên nhóm
+code: Mã nhóm
+description: Mô tả
+discount_percentage: Phần trăm giảm giá
+is_active: Trạng thái hoạt động
+benefits: Danh sách lợi ích (JSON)
+Bảng group_members (đã có từ trước) với các trường:
+customer_id: ID khách hàng
+group_id: ID nhóm
+fullname: Tên thành viên trong nhóm
+relationship: Mối quan hệ với chủ nhóm
+
+
+-----------------------------------
+Bảng bookings với các trường:
+booking_number: Số đặt phòng (unique)
+customer_id: ID khách hàng
+room_id: ID phòng
+check_in_date: Ngày nhận phòng
+check_out_date: Ngày trả phòng
+number_of_guests: Số lượng khách
+total_amount: Tổng tiền
+discount_amount: Số tiền giảm giá
+final_amount: Số tiền cuối cùng
+status: Trạng thái (pending, confirmed, checked_in, checked_out, cancelled)
+special_requests: Yêu cầu đặc biệt
+additional_services: Dịch vụ bổ sung
+Các trường timestamp cho các trạng thái
+
+------------------------------------------
+
+Bảng booking_histories với các trường:
+booking_id: ID đặt phòng
+employee_id: ID nhân viên thực hiện thao tác
+action: Hành động (created, updated, confirmed, checked_in, checked_out, cancelled)
+changes: Thay đổi được lưu dưới dạng JSON
+notes: Ghi chú
+
+-------------------------------------------
+
+Bảng rooms với các trường:
+Thông tin cơ bản: số phòng, tên, mô tả
+Quan hệ: loại phòng, tầng
+Thông số: sức chứa, giá, tiện ích, hình ảnh
+Trạng thái: available, occupied, maintenance, cleaning
+Đặc điểm: hút thuốc, ban công, view, diện tích, giường
+
+-------------------------------------------
+Bảng room_types với các trường:
+Thông tin cơ bản: tên, mô tả
+Thông số: giá cơ bản, sức chứa tối đa
+Tiện ích mặc định, hình ảnh
+Trạng thái hoạt động
+
+------------------------------------------
+Bảng floors với các trường:
+Thông tin cơ bản: tên, tầng, mô tả
+Sơ đồ tầng
+Trạng thái hoạt động
+
+
+-------------------------------------------
+Bảng room_statuses với các trường:
+Thông tin cơ bản: tên, mã, mô tả, màu sắc
+Trạng thái: hoạt động, có sẵn, đã đặt, bảo trì, đang dọn dẹp
+Độ ưu tiên
+Model RoomStatus với:
+Quan hệ với bảng rooms
+Các scope để lọc theo trạng thái
+Accessor methods cho các trạng thái
+
+----------------------------------------------
+Bảng invoices
+
+I've created the InvoiceController with comprehensive functionality for managing invoices. Here's a breakdown of the implemented features:
+Index Method:
+Lists all invoices with pagination
+Supports filtering by status, payment status, date range, and amount range
+Includes search functionality for invoice numbers and customer names
+Allows sorting by any field with customizable direction
+Store Method:
+Creates new invoices with validation
+Generates unique invoice numbers
+Handles multiple invoice items
+Calculates totals automatically
+Show Method:
+Retrieves a specific invoice with all related data
+Includes customer, booking, items, and payments
+Update Method:
+Updates draft invoices only
+Validates all input data
+Handles item updates
+Recalculates totals
+Add Payment Method:
+Adds payments to pending invoices
+Validates payment amount against remaining balance
+Updates invoice status and amounts
+Cancel Method:
+Cancels non-paid invoices
+Updates invoice status
+Refund Method:
+Processes refunds for paid invoices
+Creates negative payment records
+Updates invoice amounts and status
+Get Stats Method:
+Provides comprehensive invoice statistics
+Includes total amounts, status counts, and overdue information
+
+--------------------------------------------------------------
+Migration (invoice_details table):
+Các trường cơ bản: invoice_id, item_type, description, quantity, unit_price, total_price
+Các trường tính toán: tax_rate, tax_amount, discount_rate, discount_amount
+Trường details kiểu JSON để lưu thông tin bổ sung
+Trường is_active để quản lý trạng thái của chi tiết
+Model (InvoiceDetail):
+Quan hệ với Invoice
+Các phương thức tính toán tổng tiền, thuế, và giảm giá
+Các scope để lọc theo loại item và trạng thái
+Casting dữ liệu cho các trường số và JSON
+Controller (InvoiceDetailController):
+CRUD operations cho chi tiết hóa đơn
+Lọc và tìm kiếm chi tiết
+Toggle trạng thái active/inactive
+Thống kê chi tiết hóa đơn
+Tự động cập nhật tổng tiền hóa đơn khi thay đổi chi tiết
+
+
+------------------------------------------------------------------
+
+Migration (payments table):
+Các trường chính: payment_number, invoice_id, customer_id, amount, payment_method, payment_status, transaction_id, payment_details, payment_date, notes
+Quan hệ với bảng invoices và customers
+Model (Payment):
+Quan hệ với Invoice và Customer
+Các phương thức tính toán và kiểm tra
+Các scope để lọc theo trạng thái, phương thức thanh toán, khoảng thời gian và số tiền
+Controller (PaymentController):
+CRUD operations: index, store, show, update
+Các phương thức đặc biệt:
+complete: Đánh dấu thanh toán đã hoàn thành
+fail: Đánh dấu thanh toán thất bại
+refund: Xử lý hoàn tiền
+getStats: Lấy thống kê về thanh toán
+
+
+-----------------------------------------------------------------------------
+
+
+
+Migration (vouchers table):
+Các trường chính: code, name, description, type, value, min_order_amount, max_discount_amount, usage_limit, usage_count, per_user_limit, start_date, end_date, is_active
+Các trường JSON cho phạm vi áp dụng: applicable_room_types, applicable_customer_types, applicable_customer_groups
+Model (Voucher):
+Các scope để lọc: active, expired, upcoming, byType, byCode, available
+Các phương thức kiểm tra:
+isActive(): Kiểm tra voucher có đang hoạt động không
+isAvailable(): Kiểm tra voucher có thể sử dụng không
+calculateDiscount(): Tính toán số tiền giảm giá
+isApplicableToRoomType(), isApplicableToCustomerType(), isApplicableToCustomerGroup(): Kiểm tra phạm vi áp dụng
+Controller (VoucherController):
+CRUD operations: index, store, show, update, destroy
+Các phương thức đặc biệt:
+toggleStatus: Bật/tắt trạng thái hoạt động của voucher
+validateVoucher: Kiểm tra và tính toán giảm giá
+getStats: Lấy thống kê về voucher
+
+
+
+-----------------------------------------------------------------------------------
+
+Migration (service_details table):
+Các trường chính: name, description, price, unit, duration, is_available, requires_booking, min_booking_hours, max_booking_hours, operating_hours, requirements, included_items, additional_charges, images
+Hỗ trợ nhiều loại đơn vị (item, hour, day)
+Lưu trữ thông tin về giờ hoạt động, yêu cầu và các khoản phí bổ sung dưới dạng JSON
+Model (ServiceDetail):
+Các scope để lọc dịch vụ: available, requiresBooking, byPriceRange, byDuration, byUnit
+Các phương thức để kiểm tra trạng thái và tính toán giá
+Hỗ trợ quản lý thời gian hoạt động và đặt chỗ
+Controller (ServiceDetailController):
+CRUD operations đầy đủ
+Các phương thức đặc biệt:
+toggleStatus: Bật/tắt trạng thái khả dụng của dịch vụ
+calculatePrice: Tính toán giá tổng dựa trên số lượng và thời gian
+getTimeSlots: Lấy các khung giờ có sẵn cho dịch vụ
+getStats: Lấy thống kê về các dịch vụ
+
+
+-----------------------------------------------------------------------------------------
+
+Migration (service_types table):
+Các trường chính: name, code, description, icon, is_active, display_order, metadata
+Mã code duy nhất cho mỗi loại dịch vụ
+Hỗ trợ biểu tượng và thứ tự hiển thị
+Trường metadata để lưu trữ dữ liệu bổ sung
+Model (ServiceType):
+Mối quan hệ hasMany với ServiceDetail
+Các scope để lọc: active, inactive, byCode, ordered
+Các phương thức để quản lý trạng thái và thứ tự hiển thị
+Hỗ trợ quản lý metadata
+
+
+----------------------------------------------------------------------------------------------
+
+Migration (inventory_receivings và inventory_receiving_items tables):
+Bảng inventory_receivings chứa thông tin về phiếu nhập kho như số phiếu, ngày nhập, nhà cung cấp, trạng thái, v.v.
+Bảng inventory_receiving_items chứa thông tin chi tiết về các mặt hàng được nhập, bao gồm tên hàng, số lượng, đơn giá, tổng giá, số lô, hạn sử dụng, v.v.
+Models:
+InventoryReceiving: Quản lý phiếu nhập kho với các mối quan hệ và phương thức như:
+Quan hệ hasMany với InventoryReceivingItem
+Các scope để lọc theo trạng thái, nhà cung cấp, khoảng thời gian
+Phương thức tự động tạo số phiếu nhập
+Phương thức đánh dấu đã nhập và hủy phiếu nhập
+InventoryReceivingItem: Quản lý chi tiết các mặt hàng nhập kho với:
+Quan hệ belongsTo với InventoryReceiving
+Các scope để lọc theo mã hàng, số lô, vị trí lưu trữ
+Phương thức tính tổng giá và cập nhật số lượng/đơn giá
+
+
+-------------------------------------------------------------------------------------------------
+
+Migration (inventory_deliveries và inventory_delivery_items tables):
+Bảng inventory_deliveries chứa thông tin về phiếu xuất kho như số phiếu, ngày xuất, người nhận, trạng thái, v.v.
+Bảng inventory_delivery_items chứa thông tin chi tiết về các mặt hàng được xuất, bao gồm tên hàng, số lượng, đơn giá, tổng giá, số lô, hạn sử dụng, v.v.
+Models:
+InventoryDelivery: Quản lý phiếu xuất kho với các mối quan hệ và phương thức như:
+Quan hệ hasMany với InventoryDeliveryItem
+Các scope để lọc theo trạng thái, người nhận, khoảng thời gian
+Phương thức tự động tạo số phiếu xuất
+Phương thức đánh dấu đã xuất và hủy phiếu xuất
+InventoryDeliveryItem: Quản lý chi tiết các mặt hàng xuất kho với:
+Quan hệ belongsTo với InventoryDelivery
+Các scope để lọc theo mã hàng, số lô, vị trí lưu trữ
+Phương thức tính tổng giá và cập nhật số lượng/đơn giá
+Controller (InventoryDeliveryController):
+index: Lấy danh sách phiếu xuất kho với các tùy chọn lọc theo trạng thái, khoảng thời gian, người nhận và tìm kiếm
+store: Tạo phiếu xuất kho mới với các mặt hàng
+show: Xem chi tiết một phiếu xuất kho
+update: Cập nhật thông tin phiếu xuất kho (chỉ cho phép cập nhật phiếu ở trạng thái pending)
+destroy: Xóa phiếu xuất kho (chỉ cho phép xóa phiếu ở trạng thái pending)
+markAsDelivered: Đánh dấu phiếu xuất kho đã xuất
+cancel: Hủy phiếu xuất kho
+getStats: Lấy thống kê về số lượng phiếu xuất, tổng giá trị, số mặt hàng sắp hết hạn
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+Migration cho bảng lost_items với các trường:
+item_number: Số hiệu đồ thất lạc
+item_name: Tên đồ vật
+description: Mô tả
+category: Danh mục
+location_found: Nơi tìm thấy
+date_found: Ngày tìm thấy
+status: Trạng thái (pending/claimed/disposed)
+storage_location: Vị trí lưu trữ
+finder_name: Tên người tìm thấy
+finder_contact: Thông tin liên hệ người tìm thấy
+claimer_name: Tên người nhận
+claimer_contact: Thông tin liên hệ người nhận
+claim_date: Ngày nhận
+claim_notes: Ghi chú khi nhận
+images: Hình ảnh
+notes: Ghi chú
+Model LostItem với:
+Các thuộc tính fillable và casts
+Các scope để lọc theo trạng thái, danh mục, ngày tháng, vị trí
+Các phương thức để đánh dấu trạng thái (claimed/disposed)
+Tự động tạo số hiệu đồ thất lạc
+Controller LostItemController với các phương thức:
+index: Liệt kê đồ thất lạc với các tùy chọn lọc và tìm kiếm
+store: Tạo mới đồ thất lạc
+show: Xem chi tiết một đồ thất lạc
+update: Cập nhật thông tin đồ thất lạc
+destroy: Xóa đồ thất lạc
+markAsClaimed: Đánh dấu đã được nhận
+markAsDisposed: Đánh dấu đã được xử lý
+getStats: Lấy thống kê về đồ thất lạc

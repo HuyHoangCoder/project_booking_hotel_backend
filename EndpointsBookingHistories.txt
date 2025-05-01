@@ -1,0 +1,4 @@
+GET /api/booking-histories: Danh sách lịch sử
+GET /api/booking-histories/{id}: Chi tiết bản ghi lịch sử
+GET /api/bookings/{bookingId}/history: Lịch sử của một đặt phòng
+GET /api/employees/{employeeId}/booking-history: Lịch sử thao tác của nhân viên

@@ -1,0 +1,8 @@
+GET /vouchers: Lấy danh sách voucher
+POST /vouchers: Tạo voucher mới
+GET /vouchers/stats: Lấy thống kê voucher
+GET /vouchers/{id}: Xem chi tiết voucher
+PUT /vouchers/{id}: Cập nhật voucher
+DELETE /vouchers/{id}: Xóa voucher
+PATCH /vouchers/{id}/toggle-status: Bật/tắt trạng thái
+POST /vouchers/validate: Kiểm tra và tính toán giảm giá

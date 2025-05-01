@@ -1,0 +1,7 @@
+Các API endpoints mới:
+    POST /api/customers/{id}/lost-items
+- Báo cáo đồ thất lạc mới
+    Body: item_name, description, location_found, found_at, notes
+    PUT /api/customers/{id}/lost-items/{itemId}
+- Cập nhật trạng thái đồ thất lạc
+    Body: status (pending/claimed/disposed), notes

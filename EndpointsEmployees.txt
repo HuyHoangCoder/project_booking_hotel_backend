@@ -1,0 +1,28 @@
+API Endpoints:
+ - Lấy danh sách nhân viên
+    Method: GET
+    URL: /api/employees
+    Query params:
+    role_id: Lọc theo vai trò
+    is_active: Lọc theo trạng thái
+    search: Tìm kiếm theo tên hoặc email
+ - Thêm nhân viên mới
+    Method: POST
+    URL: /api/employees
+    Body (multipart/form-data):
+
+- Xem chi tiết nhân viên
+    Method: GET
+    URL: /api/employees/{id}
+    Response: Thông tin nhân viên kèm role, account, bookings, invoices
+- Cập nhật thông tin nhân viên
+    Method: POST
+    URL: /api/employees/{id}
+    Body: Tương tự như thêm mới
+- Xóa nhân viên
+    Method: DELETE
+    URL: /api/employees/{id}
+    Kiểm tra ràng buộc trước khi xóa
+- Thay đổi trạng thái nhân viên
+    Method: PATCH
+    URL: /api/employees/{id}/toggle-status
